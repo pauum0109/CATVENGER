@@ -1,14 +1,14 @@
 package UI;
 
-import javax.swing.JPanel;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.event.*;
 import GameState.GameStateManager;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
-    public static final int WIDTH = 320;
-    public static final int HEIGHT = 240;
+    public static final int WIDTH = 440;
+    public static final int HEIGHT = 260;
     public static final int SCALE = 2;
 
     private Thread thread;
@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private long targetTime = 1000/FPS;
 
     private BufferedImage image;
-    private Graphics2D gr1;
+    private Graphics2D g1;
     private GameStateManager gameStateManager;
 
     public GamePanel(){
@@ -26,17 +26,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         setFocusable(true);
         requestFocus();
     }
-    public void addNoitify(){
+    public void addNotify(){
         super.addNotify();
         if (thread == null){
             thread = new Thread(this);
-            addKeyListener((this));
+            addKeyListener(this);
             thread.start();
         }
     }
-    public void init(){
+    private void init(){
         image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
-        gr1 = (Graphics2D) image.getGraphics();
+        g1 = (Graphics2D) image.getGraphics();
         running = true;
         gameStateManager = new GameStateManager();
     }
@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             elapsed = System.nanoTime() - start;
 
             wait = targetTime - elapsed/1000000;
+            if (wait<0) wait = 5;
             try{
                 Thread.sleep(wait);
             }
@@ -68,12 +69,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         gameStateManager.update();
     }
     public void draw(){
-        gameStateManager.draw(gr1);
+        gameStateManager.draw(g1);
     }
     public void drawToScreen(){
-        Graphics gr2 = getGraphics();
-        gr2.drawImage(image,0,0,null);
-        gr2.dispose();
+        Graphics g2 = getGraphics();
+        g2.drawImage(image,0,0,WIDTH*SCALE,HEIGHT*SCALE,null);
+        g2.dispose();
     }
 
     public void keyTyped(KeyEvent key){

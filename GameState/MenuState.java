@@ -1,7 +1,7 @@
 package GameState;
 
-import java.awt.*;
 import GameObject.Background;
+import java.awt.*;
 import java.awt.event.*;
 
 public class MenuState extends GameState{
@@ -17,17 +17,18 @@ public class MenuState extends GameState{
     public MenuState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
         try{
-            bg = new Background("Background/MenuBackground.jpg", 1);
-            bg.setVector(0,1,0);
+            bg = new Background("/Resources/Backgrounds/MenuBackground4.jpg", 1);
+            bg.setVector(-0.1,0);
 
             titleColor = new Color(128,0,0);
-            titleFont = new Font("Century Gothic",Font.Plain,28);
+            titleFont = new Font("Century Gothic",Font.PLAIN,28);
             font = new Font("Arial",Font.PLAIN,12);
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
+
     public void init(){
 
     }
@@ -38,7 +39,7 @@ public class MenuState extends GameState{
         bg.draw(g);
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("CATVENGER",80,70);
+        g.drawString("CATVENGER",140,100);
 
         g.setFont(font);
         for (int i=0;i<options.length;i++){
@@ -48,17 +49,17 @@ public class MenuState extends GameState{
             else{
                 g.setColor(Color.RED);
             }
-            g.drawString(option[i],145,140+i*15);
+            g.drawString(options[i],200,140+i*15);
         }
     }
     private void select(){
         if (currentChoice == 0){
+            gameStateManager.setState(GameStateManager.LEVELONESTATE);
+        }
+        if (currentChoice == 1){
 
         }
-        else if (currentChoice == 1){
-
-        }
-        else if (currentChoice == 2){
+        if (currentChoice == 2){
             System.exit(0);
         }
     }
