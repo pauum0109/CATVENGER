@@ -1,37 +1,49 @@
 package GameState;
 
-import java.util.ArrayList;
-
-public class GameStateManager {
-    private ArrayList<GameState> gameStates;
+public class GameStateManager{
+    private GameState[] gameStates;
     private int currentState;
-
+	public static final int NUMGAMESTATES = 2;
     public static final int MENUSTATE = 0;
     public static final int LEVELONESTATE = 1;
 
     public GameStateManager(){
-        gameStates = new ArrayList<GameState>();
-
+        gameStates = new GameState[NUMGAMESTATES];
         currentState = MENUSTATE;
-        gameStates.add(new MenuState(this));
-        gameStates.add(new LevelOneState(this));
+        loadState(currentState);
     }
+    private void loadState(int state){
+		if(state == MENUSTATE) gameStates[state] = new MenuState(this);
+		if(state == LEVELONESTATE) gameStates[state] = new LevelOneState(this);
+	}
+    private void unloadState(int state){
+		gameStates[state] = null;
+	}
     public void setState(int state){
-        currentState = state;
-        gameStates.get(currentState).init();
-
-    }
+		unloadState(currentState);
+		currentState = state;
+		loadState(currentState);
+	}
     public void update(){
-        gameStates.get(currentState).update();
+		try {
+			gameStates[currentState].update();
+		} 
+        catch (Exception e){
 
-    }
+        }
+	}
     public void draw(java.awt.Graphics2D g){
-        gameStates.get(currentState).draw(g);
-    }
-    public void keyPressed(int k){
-        gameStates.get(currentState).keyPressed(k);
-    }
-    public void keyReleased(int k){
-        gameStates.get(currentState).keyReleased(k);
-    }
+		try {
+			gameStates[currentState].draw(g);
+		} 
+        catch(Exception e){
+
+        }
+	}
+	public void keyPressed(int k){
+		gameStates[currentState].keyPressed(k);
+	}
+	public void keyReleased(int k){
+		gameStates[currentState].keyReleased(k);
+	}
 }
