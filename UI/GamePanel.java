@@ -6,9 +6,10 @@ import java.awt.event.*;
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
-    public static final int WIDTH = 440;
-    public static final int HEIGHT = 260;
+    public static final int WIDTH = 320;
+    public static final int HEIGHT = 240;
     public static final int SCALE = 2;
 
     private Thread thread;
