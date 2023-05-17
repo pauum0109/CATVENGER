@@ -18,7 +18,7 @@ public class MenuState extends GameState{
     public MenuState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
         try{
-            bg = new Background("/Resources/Backgrounds/MenuBackground4.jpg", 1);
+            bg = new Background("/Resources/Backgrounds/menubg.gif", 1);
             bg.setVector(-0.1,0);
 
             titleColor = new Color(255,182,43);
@@ -41,7 +41,7 @@ public class MenuState extends GameState{
         bg.draw(g);
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("CATVENGER",140,100);
+        g.drawString("CATVENGER",80,70);
 
         g.setFont(font);
         for (int i=0;i<options.length;i++){
@@ -51,7 +51,7 @@ public class MenuState extends GameState{
             else{
                 g.setColor(Color.RED);
             }
-            g.drawString(options[i],200,140+i*15);
+            g.drawString(options[i],145,140+i*15);
         }
     }
     private void select(){
