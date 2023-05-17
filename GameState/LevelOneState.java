@@ -1,22 +1,27 @@
 package GameState;
 
-import java.awt.*;
-import GameObject.*;
 import UI.GamePanel;
+import GameObject.*;
 
-public class LevelOneState extends GameState{
-    private TileMap tileMap;
+import java.awt.*;
 
-    public LevelOneState(GameStateManager gameStateManager){
-        this.gameStateManager = gameStateManager;
-        init();
-    }
-    public void init(){
-        tileMap = new TileMap(30);
-        tileMap.loadTiles("/Resources/Tilesets/grasstileset.gif");
-        tileMap.loadTiles("/Resources/Map/Level1-1.map");
-        tileMap.setPosition(0, 0);
-    }
+public class LevelOneState extends GameState {
+	
+	private TileMap tileMap;
+	
+	public LevelOneState(GameStateManager gsm) {
+		this.gameStateManager = gsm;
+		init();
+	}
+	
+	public void init() {
+		
+		tileMap = new TileMap(30);
+		tileMap.loadTiles("/Resources/Tilesets/grasstileset.gif");
+		tileMap.loadMap("/Resources/Maps/level1-1.map");
+		tileMap.setPosition(0, 0);
+		
+	}
     public void update(){
 
     }
