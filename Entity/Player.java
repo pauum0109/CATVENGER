@@ -2,7 +2,6 @@ package Entity;
 
 import GameObject.*;
 import Audio.AudioPlayer;
-
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -82,16 +81,39 @@ public class Player extends MapObject {
 		
 		// load sprites
 		try {
-		    BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Player/playersprites.gif"));
+			
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Player/playersprites.gif"));
 			sprites = new ArrayList<BufferedImage[]>();
 			for(int i = 0; i < 7; i++) {
-				BufferedImage[] bi = new BufferedImage[numFrames[i]];
-				for(int j = 0; j < numFrames[i]; j++){
-					if(i != SCRATCHING) bi[j] = spritesheet.getSubimage(j * width,i * height,width,height);
-					else bi[j] = spritesheet.getSubimage(j * width * 2,i * height,width * 2,height);
+				
+				BufferedImage[] bi =
+					new BufferedImage[numFrames[i]];
+				
+				for(int j = 0; j < numFrames[i]; j++) {
+					
+					if(i != SCRATCHING) {
+						bi[j] = spritesheet.getSubimage(
+								j * width,
+								i * height,
+								width,
+								height
+						);
+					}
+					else {
+						bi[j] = spritesheet.getSubimage(
+								j * width * 2,
+								i * height,
+								width * 2,
+								height
+						);
+					}
+					
 				}
+				
 				sprites.add(bi);
+				
 			}
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -108,18 +130,10 @@ public class Player extends MapObject {
 		
 	}
 	
-	public int getHealth() { 
-        return health; 
-    }
-	public int getMaxHealth() { 
-        return maxHealth; 
-    }
-	public int getFire() { 
-        return fire; 
-    }
-	public int getMaxFire() { 
-        return maxFire; 
-    }
+	public int getHealth() { return health; }
+	public int getMaxHealth() { return maxHealth; }
+	public int getFire() { return fire; }
+	public int getMaxFire() { return maxFire; }
 	
 	public void setFiring() { 
 		firing = true;
@@ -135,16 +149,28 @@ public class Player extends MapObject {
 		
 		// loop through enemies
 		for(int i = 0; i < enemies.size(); i++) {
+			
 			Enemy e = enemies.get(i);
+			
 			// scratch attack
 			if(scratching) {
 				if(facingRight) {
-					if(e.getx() > x && e.getx() < x + scratchRange && e.gety() > y - height / 2 && e.gety() < y + height / 2) {
+					if(
+						e.getx() > x &&
+						e.getx() < x + scratchRange && 
+						e.gety() > y - height / 2 &&
+						e.gety() < y + height / 2
+					) {
 						e.hit(scratchDamage);
 					}
 				}
 				else {
-					if(e.getx() < x && e.getx() > x - scratchRange && e.gety() > y - height / 2 && e.gety() < y + height / 2) {
+					if(
+						e.getx() < x &&
+						e.getx() > x - scratchRange &&
+						e.gety() > y - height / 2 &&
+						e.gety() < y + height / 2
+					) {
 						e.hit(scratchDamage);
 					}
 				}
@@ -160,8 +186,12 @@ public class Player extends MapObject {
 			}
 			
 			// check enemy collision
-			if(intersects(e)) hit(e.getDamage());
+			if(intersects(e)) {
+				hit(e.getDamage());
+			}
+			
 		}
+		
 	}
 	
 	public void hit(int damage) {
@@ -178,39 +208,58 @@ public class Player extends MapObject {
 		// movement
 		if(left) {
 			dx -= moveSpeed;
-			if(dx < -maxSpeed) dx = -maxSpeed;
+			if(dx < -maxSpeed) {
+				dx = -maxSpeed;
+			}
 		}
 		else if(right) {
 			dx += moveSpeed;
-			if(dx > maxSpeed) dx = maxSpeed;
+			if(dx > maxSpeed) {
+				dx = maxSpeed;
+			}
 		}
 		else {
 			if(dx > 0) {
 				dx -= stopSpeed;
-				if(dx < 0) dx = 0;
+				if(dx < 0) {
+					dx = 0;
+				}
 			}
 			else if(dx < 0) {
 				dx += stopSpeed;
-				if(dx > 0) dx = 0;
+				if(dx > 0) {
+					dx = 0;
+				}
 			}
 		}
 		
 		// cannot move while attacking, except in air
-		if ((currentAction == SCRATCHING || currentAction == FIREBALL) && !(jumping || falling)) dx = 0;
+		if(
+		(currentAction == SCRATCHING || currentAction == FIREBALL) &&
+		!(jumping || falling)) {
+			dx = 0;
+		}
+		
 		// jumping
 		if(jumping && !falling) {
 			sfx.get("jump").play();
 			dy = jumpStart;
 			falling = true;
 		}
+		
 		// falling
 		if(falling) {
+			
 			if(dy > 0 && gliding) dy += fallSpeed * 0.1;
 			else dy += fallSpeed;
+			
 			if(dy > 0) jumping = false;
 			if(dy < 0 && !jumping) dy += stopJumpSpeed;
+			
 			if(dy > maxFallSpeed) dy = maxFallSpeed;
+			
 		}
+		
 	}
 	
 	public void update() {
@@ -316,22 +365,33 @@ public class Player extends MapObject {
 				width = 30;
 			}
 		}
+		
 		animation.update();
+		
 		// set direction
 		if(currentAction != SCRATCHING && currentAction != FIREBALL) {
 			if(right) facingRight = true;
 			if(left) facingRight = false;
 		}
+		
 	}
 	
 	public void draw(Graphics2D g) {
+		
 		setMapPosition();
+		
 		// draw fireballs
-		for(int i = 0; i < fireBalls.size(); i++) fireBalls.get(i).draw(g);
+		for(int i = 0; i < fireBalls.size(); i++) {
+			fireBalls.get(i).draw(g);
+		}
+		
 		// draw player
 		if(flinching) {
-			long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
-			if(elapsed / 100 % 2 == 0)  return;
+			long elapsed =
+				(System.nanoTime() - flinchTimer) / 1000000;
+			if(elapsed / 100 % 2 == 0) {
+				return;
+			}
 		}
 		super.draw(g);
 	}

@@ -23,15 +23,13 @@ public class Animation {
 		playedOnce = false;
 	}
 	
-	public void setDelay(long d){ 
-        delay = d; 
-    }
-	public void setFrame(int i){ 
-        currentFrame = i; 
-    }
+	public void setDelay(long d) { delay = d; }
+	public void setFrame(int i) { currentFrame = i; }
 	
 	public void update() {
+		
 		if(delay == -1) return;
+		
 		long elapsed = (System.nanoTime() - startTime) / 1000000;
 		if(elapsed > delay) {
 			currentFrame++;
@@ -41,16 +39,11 @@ public class Animation {
 			currentFrame = 0;
 			playedOnce = true;
 		}
+		
 	}
 	
-	public int getFrame() { 
-		return currentFrame; 
-	}
-	public BufferedImage getImage() { 
-		return frames[currentFrame]; 
-	}
-	public boolean hasPlayedOnce() { 
-		return playedOnce; 
-	}
+	public int getFrame() { return currentFrame; }
+	public BufferedImage getImage() { return frames[currentFrame]; }
+	public boolean hasPlayedOnce() { return playedOnce; }
 	
 }

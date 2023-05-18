@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Explosion {
+	
 	private int x;
 	private int y;
 	private int xmap;
@@ -27,10 +28,16 @@ public class Explosion {
 		height = 30;
 		
 		try {
-			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Enemies/explosion.gif"));
+			
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("Resources/Sprites/Enemies/explosion.gif"));
 			sprites = new BufferedImage[6];
 			for(int i = 0; i < sprites.length; i++) {
-				sprites[i] = spritesheet.getSubimage(i * width,0,width,height);
+				sprites[i] = spritesheet.getSubimage(
+					i * width,
+					0,
+					width,
+					height
+				);
 			}
 			
 		}
@@ -59,7 +66,12 @@ public class Explosion {
 	}
 	
 	public void draw(Graphics2D g) {
-		g.drawImage(animation.getImage(),x + xmap - width / 2,y + ymap - height / 2,null);
+		g.drawImage(
+			animation.getImage(),
+			x + xmap - width / 2,
+			y + ymap - height / 2,
+			null
+		);
 	}
 	
 }

@@ -1,17 +1,18 @@
 package Entity;
 
 import GameObject.TileMap;
-
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
-
 import javax.imageio.ImageIO;
 
 public class Slugger extends Enemy {
+	
 	private BufferedImage[] sprites;
 	
 	public Slugger(TileMap tm) {
+		
 		super(tm);
+		
 		moveSpeed = 0.3;
 		maxSpeed = 0.3;
 		fallSpeed = 0.2;
@@ -27,16 +28,13 @@ public class Slugger extends Enemy {
 		
 		// load sprites
 		try {
+			
 			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Enemies/slugger.gif"));
 			sprites = new BufferedImage[3];
 			for(int i = 0; i < sprites.length; i++) {
-				sprites[i] = spritesheet.getSubimage(
-					i * width,
-					0,
-					width,
-					height
-				);
+				sprites[i] = spritesheet.getSubimage(i * width,0,width,height);
 			}
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -112,8 +110,8 @@ public class Slugger extends Enemy {
 		//if(notOnScreen()) return;
 		
 		setMapPosition();
-		
 		super.draw(g);
 		
 	}
+	
 }
