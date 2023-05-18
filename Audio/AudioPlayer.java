@@ -3,15 +3,32 @@ package Audio;
 import javax.sound.sampled.*;
 
 public class AudioPlayer {
+	
 	private Clip clip;
 	
 	public AudioPlayer(String s) {
+		
 		try {
-			AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(s));
+			
+			AudioInputStream ais =
+				AudioSystem.getAudioInputStream(
+					getClass().getResourceAsStream(
+						s
+					)
+				);
 			AudioFormat baseFormat = ais.getFormat();
-			AudioFormat decodeFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,baseFormat.getSampleRate(),16,baseFormat.getChannels(),
-				baseFormat.getChannels() * 2,baseFormat.getSampleRate(),false);
-			AudioInputStream dais = AudioSystem.getAudioInputStream(decodeFormat, ais);
+			AudioFormat decodeFormat = new AudioFormat(
+				AudioFormat.Encoding.PCM_SIGNED,
+				baseFormat.getSampleRate(),
+				16,
+				baseFormat.getChannels(),
+				baseFormat.getChannels() * 2,
+				baseFormat.getSampleRate(),
+				false
+			);
+			AudioInputStream dais =
+				AudioSystem.getAudioInputStream(
+					decodeFormat, ais);
 			clip = AudioSystem.getClip();
 			clip.open(dais);
 		}
