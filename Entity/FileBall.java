@@ -31,11 +31,7 @@ public class FireBall extends MapObject {
 		// load sprites
 		try {
 			
-			BufferedImage spritesheet = ImageIO.read(
-				getClass().getResourceAsStream(
-					"/Sprites/Player/fireball.gif"
-				)
-			);
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("Resources/Sprites/Player/fireball.gif"));
 			
 			sprites = new BufferedImage[4];
 			for(int i = 0; i < sprites.length; i++) {
@@ -76,10 +72,11 @@ public class FireBall extends MapObject {
 		dx = 0;
 	}
 	
-	public boolean shouldRemove() { return remove; }
+	public boolean shouldRemove() { 
+		return remove; 
+	}
 	
 	public void update() {
-		
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
 		
@@ -91,15 +88,10 @@ public class FireBall extends MapObject {
 		if(hit && animation.hasPlayedOnce()) {
 			remove = true;
 		}
-		
 	}
 	
 	public void draw(Graphics2D g) {
-		
 		setMapPosition();
-		
 		super.draw(g);
-		
 	}
-	
 }
