@@ -16,9 +16,13 @@ public class Enemy extends MapObject {
 		super(tm);
 	}
 	
-	public boolean isDead() { return dead; }
+	public boolean isDead() { 
+		return dead; 
+	}
 	
-	public int getDamage() { return damage; }
+	public int getDamage() { 
+		return damage; 
+	}
 	
 	public void hit(int damage) {
 		if(dead || flinching) return;
@@ -29,6 +33,8 @@ public class Enemy extends MapObject {
 		flinchTimer = System.nanoTime();
 	}
 	
-	public void update() {}
+	public void update() {
+		
+	}
 	
 }
