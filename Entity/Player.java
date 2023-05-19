@@ -54,8 +54,8 @@ public class Player extends MapObject {
 		
 		super(tm);
 		
-		width = 30;
-		height = 30;
+		width = 45;
+		height = 45;
 		cwidth = 20;
 		cheight = 20;
 		

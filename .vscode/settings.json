@@ -2,7 +2,10 @@
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.referencedLibraries": {
         "include": [
-            "lib/**/*.jar"
+            "lib/**/*.jar",
+            "d:\\Code\\jl1.0.1.jar",
+            "d:\\Code\\mp3spi1.9.5.jar",
+            "d:\\Code\\tritonus_share.jar"
         ],
         "exclude": [
             "c:\\Users\\Alice\\Downloads\\Artifact.jar"
