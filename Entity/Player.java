@@ -86,22 +86,11 @@ public class Player extends MapObject {
 			sprites = new ArrayList<BufferedImage[]>();
 			for(int i = 0; i < 7; i++) {
 				
-				BufferedImage[] bi =
-					new BufferedImage[numFrames[i]];
-				
+				BufferedImage[] bi = new BufferedImage[numFrames[i]];
 				for(int j = 0; j < numFrames[i]; j++) {
-					
-					if(i != SCRATCHING) {
-						bi[j] = spritesheet.getSubimage(j * width,i * height,width,height);
-					}
-					else {
-						bi[j] = spritesheet.getSubimage(j * width * 2,i * height,width * 2,height);
-					}
-					
+					bi[j] = spritesheet.getSubimage(j * width,i * height,width,height);
 				}
-				
 				sprites.add(bi);
-				
 			}
 			
 		}
@@ -304,7 +293,7 @@ public class Player extends MapObject {
 				currentAction = SCRATCHING;
 				animation.setFrames(sprites.get(SCRATCHING));
 				animation.setDelay(50);
-				width = 60;
+				width = 45;
 			}
 		}
 		else if(firing) {
@@ -312,7 +301,7 @@ public class Player extends MapObject {
 				currentAction = FIREBALL;
 				animation.setFrames(sprites.get(FIREBALL));
 				animation.setDelay(100);
-				width = 30;
+				width = 45;
 			}
 		}
 		else if(dy > 0) {
@@ -321,14 +310,14 @@ public class Player extends MapObject {
 					currentAction = GLIDING;
 					animation.setFrames(sprites.get(GLIDING));
 					animation.setDelay(100);
-					width = 30;
+					width = 45;
 				}
 			}
 			else if(currentAction != FALLING) {
 				currentAction = FALLING;
 				animation.setFrames(sprites.get(FALLING));
 				animation.setDelay(100);
-				width = 30;
+				width = 45;
 			}
 		}
 		else if(dy < 0) {
@@ -336,7 +325,7 @@ public class Player extends MapObject {
 				currentAction = JUMPING;
 				animation.setFrames(sprites.get(JUMPING));
 				animation.setDelay(-1);
-				width = 30;
+				width = 45;
 			}
 		}
 		else if(left || right) {
@@ -344,7 +333,7 @@ public class Player extends MapObject {
 				currentAction = WALKING;
 				animation.setFrames(sprites.get(WALKING));
 				animation.setDelay(40);
-				width = 30;
+				width = 45;
 			}
 		}
 		else {
@@ -352,7 +341,7 @@ public class Player extends MapObject {
 				currentAction = IDLE;
 				animation.setFrames(sprites.get(IDLE));
 				animation.setDelay(400);
-				width = 30;
+				width = 45;
 			}
 		}
 		
