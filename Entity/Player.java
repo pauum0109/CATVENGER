@@ -56,8 +56,8 @@ public class Player extends MapObject {
 		
 		width = 45;
 		height = 45;
-		cwidth = 20;
-		cheight = 20;
+		cwidth = 25;
+		cheight = 25;
 		
 		moveSpeed = 0.3;
 		maxSpeed = 1.6;
@@ -92,20 +92,10 @@ public class Player extends MapObject {
 				for(int j = 0; j < numFrames[i]; j++) {
 					
 					if(i != SCRATCHING) {
-						bi[j] = spritesheet.getSubimage(
-								j * width,
-								i * height,
-								width,
-								height
-						);
+						bi[j] = spritesheet.getSubimage(j * width,i * height,width,height);
 					}
 					else {
-						bi[j] = spritesheet.getSubimage(
-								j * width * 2,
-								i * height,
-								width * 2,
-								height
-						);
+						bi[j] = spritesheet.getSubimage(j * width * 2,i * height,width * 2,height);
 					}
 					
 				}
