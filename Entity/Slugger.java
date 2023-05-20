@@ -5,11 +5,11 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import javax.imageio.ImageIO;
 
-public class Saw extends Enemy {
+public class Slugger extends Enemy {
 	
 	private BufferedImage[] sprites;
 	
-	public Saw(TileMap tm) {
+	public Slugger(TileMap tm) {
 		
 		super(tm);
 		
@@ -29,7 +29,7 @@ public class Saw extends Enemy {
 		// load sprites
 		try {
 			
-			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Enemies/saw.gif"));
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Enemies/slugger.gif"));
 			sprites = new BufferedImage[3];
 			for(int i = 0; i < sprites.length; i++) {
 				sprites[i] = spritesheet.getSubimage(i * width,0,width,height);
