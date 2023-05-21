@@ -1,22 +1,20 @@
 package Entity;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class HUD {
-	
 	private Player player;
-	
-	private BufferedImage image;
-	private Font font;
+	private BufferedImage heart;
+	private BufferedImage life;
 	
 	public HUD(Player p) {
 		player = p;
 		try {
-			image = ImageIO.read(
-				getClass().getResourceAsStream("/Resources/HUD/hud.gif"));
-			font = new Font("Arial", Font.PLAIN, 14);
+			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/Resources/HUD/Hud.gif"));
+			heart = image.getSubimage(0, 0, 13, 12);
+			life = image.getSubimage(0, 12, 12, 11);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -24,19 +22,14 @@ public class HUD {
 	}
 	
 	public void draw(Graphics2D g) {
-		
-		g.drawImage(image, 0, 10, null);
-		g.setFont(font);
-		g.setColor(Color.WHITE);
-		g.drawString(
-			player.getHealth() + "/" + player.getMaxHealth(),
-			30,
-			25
-		);
-		g.drawString(
-			player.getFire() / 100 + "/" + player.getMaxFire() / 100,
-			30,
-			45
-		);	
+		for(int i = 0; i < player.getHealth(); i++) {
+			g.drawImage(heart, 10 + i * 15, 10, null);
+		}
+		for(int i = 0; i < player.getLives(); i++) {
+			g.drawImage(life, 10 + i * 15, 25, null);
+		}
+		g.setColor(java.awt.Color.WHITE);
+		g.drawString(player.getTimeToString(), 290, 15);
 	}
+	
 }

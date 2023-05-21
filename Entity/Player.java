@@ -9,15 +9,16 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public class Player extends MapObject {
-	
 	// player stuff
 	private int health;
+	private int lives;
 	private int maxHealth;
 	private int fire;
 	private int maxFire;
 	private boolean dead;
 	private boolean flinching;
 	private long flinchTimer;
+	private long time;
 	
 	// fireball
 	private boolean firing;
@@ -47,13 +48,13 @@ public class Player extends MapObject {
 	private static final int GLIDING = 4;
 	private static final int FIREBALL = 5;
 	private static final int SCRATCHING = 6;
+	private static final int DEAD = 7;
 	
 	private HashMap<String, AudioPlayer> sfx;
 	
 	public Player(TileMap tm) {
-		
 		super(tm);
-		
+
 		width = 45;
 		height = 45;
 		cwidth = 25;
@@ -69,6 +70,7 @@ public class Player extends MapObject {
 		
 		facingRight = true;
 		
+		lives = 3;
 		health = maxHealth = 5;
 		fire = maxFire = 2500;
 		
@@ -85,14 +87,12 @@ public class Player extends MapObject {
 			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Player/playersprites.gif"));
 			sprites = new ArrayList<BufferedImage[]>();
 			for(int i = 0; i < 7; i++) {
-				
 				BufferedImage[] bi = new BufferedImage[numFrames[i]];
 				for(int j = 0; j < numFrames[i]; j++) {
 					bi[j] = spritesheet.getSubimage(j * width,i * height,width,height);
 				}
 				sprites.add(bi);
 			}
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -106,14 +106,56 @@ public class Player extends MapObject {
 		sfx = new HashMap<String, AudioPlayer>();
 		sfx.put("jump", new AudioPlayer("/Resources/SFX/jump.mp3"));
 		sfx.put("scratch", new AudioPlayer("/Resources/SFX/scratch.mp3"));
-		
 	}
 	
-	public int getHealth() { return health; }
-	public int getMaxHealth() { return maxHealth; }
-	public int getFire() { return fire; }
-	public int getMaxFire() { return maxFire; }
-	
+	public int getHealth(){
+		return health; 
+	}
+	public int getMaxHealth(){
+		return maxHealth; 
+	}
+	public int getFire(){
+		return fire;
+	}
+	public int getMaxFire(){
+		return maxFire; 
+	}
+	public int getLives(){
+		return lives;
+	}
+	public void setHealth(int i){
+		health = i; 
+	}
+	public void setLives(int i){
+		lives = i; 
+	}
+	public void setDead() {
+		health = 0;
+		stop();
+	}
+	public void reset(){
+		health = maxHealth;
+		facingRight = true;
+		currentAction = -1;
+		stop();
+	}
+	public void stop(){
+		left = right = up = down = flinching = false;
+		jumping = false;
+	}
+	public void gainLife(){
+		lives++;
+	}
+	public void loseLife(){
+		lives--;
+	}
+	public String getTimeToString(){
+		int minutes = (int) (time / 3600);
+		int seconds = (int) ((time % 3600) / 60);
+		return seconds < 10 ? minutes + ":0" + seconds : minutes + ":" + seconds;
+	}
+	public long getTime() { return time; }
+	public void setTime(long t) { time = t; }
 	public void setFiring() { 
 		firing = true;
 	}
@@ -176,8 +218,15 @@ public class Player extends MapObject {
 	public void hit(int damage) {
 		if(flinching) return;
 		health -= damage;
-		if(health < 0) health = 0;
-		if(health == 0) dead = true;
+		if(health < 0){
+			reset();
+			loseLife();
+			if (getLives()<0){
+				// GameOver
+				System.exit(0);
+			}
+		}
+		if(health == 0 && getLives()==0) dead = true;
 		flinching = true;
 		flinchTimer = System.nanoTime();
 	}
@@ -242,7 +291,7 @@ public class Player extends MapObject {
 	}
 	
 	public void update() {
-		
+		time++;
 		// update position
 		getNextPosition();
 		checkTileMapCollision();
@@ -287,7 +336,15 @@ public class Player extends MapObject {
 		}
 		
 		// set animation
-		if(scratching) {
+		if (health == 0){
+			if (currentAction != DEAD){
+				currentAction = DEAD;
+				animation.setFrames(sprites.get(DEAD));
+				animation.setDelay(50);
+				width = 45;
+			}
+		}
+		else if(scratching) {
 			if(currentAction != SCRATCHING) {
 				sfx.get("scratch").play();
 				currentAction = SCRATCHING;
