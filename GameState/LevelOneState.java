@@ -43,7 +43,7 @@ public class LevelOneState extends GameState {
 		hud = new HUD(player);
 		// teleport
 		teleport = new Teleport(tileMap);
-		teleport.setPosition(200, 190);
+		teleport.setPosition(5300, 190);
 
 		bgMusic = new AudioPlayer("/Resources/Music/level1-1.mp3");
 		bgMusic.play();
@@ -177,6 +177,8 @@ public class LevelOneState extends GameState {
 				gameStateManager.setState(GameStateManager.DIESTATE);
 			}
 			else {
+				player.setDead();
+				player.stop();
 				eventDead = false;
 				eventCount = 0;
 				player.loseLife();
