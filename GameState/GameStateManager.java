@@ -3,9 +3,11 @@ package GameState;
 public class GameStateManager{
     private GameState[] gameStates;
     private int currentState;
-	public static final int NUMGAMESTATES = 2;
+	public static final int NUMGAMESTATES = 4;
     public static final int MENUSTATE = 0;
     public static final int LEVELONESTATE = 1;
+    public static final int WINSTATE = 2;
+    public static final int DIESTATE = 3;
 
     public GameStateManager(){
         gameStates = new GameState[NUMGAMESTATES];
@@ -14,7 +16,10 @@ public class GameStateManager{
     }
     private void loadState(int state){
 		if(state == MENUSTATE) gameStates[state] = new MenuState(this);
-		if(state == LEVELONESTATE) gameStates[state] = new LevelOneState(this);
+		else if(state == LEVELONESTATE) gameStates[state] = new LevelOneState(this);
+		else if(state == WINSTATE) gameStates[state] = new WinState(this);
+		else if(state == DIESTATE) gameStates[state] = new DieState(this);
+
 	}
     private void unloadState(int state){
 		gameStates[state] = null;

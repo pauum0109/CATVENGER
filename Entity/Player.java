@@ -341,7 +341,7 @@ public class Player extends MapObject {
 				currentAction = DEAD;
 				animation.setFrames(sprites.get(DEAD));
 				animation.setDelay(50);
-				width = 45;
+				width = 60;
 			}
 		}
 		else if(scratching) {
