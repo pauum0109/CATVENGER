@@ -40,11 +40,18 @@ public class LevelOneState extends GameState {
     private void populateEnemies() {
 		
 		enemies = new ArrayList<Enemy>();
-		Slugger s;
-		Point[] points = new Point[] {new Point(200, 100),new Point(860, 200),new Point(1525, 200),new Point(1680, 200),new Point(1800, 200)};
-		for(int i = 0; i < points.length; i++) {
-			s = new Slugger(tileMap);
-			s.setPosition(points[i].x, points[i].y);
+		Rat r;
+		Saw s;
+		Point[] pointsRat = new Point[] {new Point(860, 200),new Point(1525, 200),new Point(1680, 200),new Point(1800, 200)};
+		Point[] pointsSaw = new Point[] {new Point(200, 100)};
+		for(int i = 0; i < pointsRat.length; i++) {
+			r = new Rat(tileMap);
+			r.setPosition(pointsRat[i].x, pointsRat[i].y);
+			enemies.add(r);
+		}
+		for(int i = 0; i < pointsSaw.length; i++) {
+			s = new Saw(tileMap);
+			s.setPosition(pointsSaw[i].x, pointsSaw[i].y);
 			enemies.add(s);
 		}
 	}
