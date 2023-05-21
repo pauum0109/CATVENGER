@@ -16,9 +16,15 @@ public class LevelOneState extends GameState {
 	private ArrayList<Explosion> explosions;
 	private HUD hud;
 	private AudioPlayer bgMusic;
+	private Teleport teleport;
 
-	public LevelOneState(GameStateManager gsm) {
-		this.gameStateManager = gsm;
+	private int eventCount = 0;
+	private ArrayList<Rectangle> tb;
+	private boolean eventFinish;
+
+
+	public LevelOneState(GameStateManager gameStateManager) {
+		this.gameStateManager = gameStateManager;
 		init();
 	}
 	
@@ -34,6 +40,10 @@ public class LevelOneState extends GameState {
 		populateEnemies();
 		explosions = new ArrayList<Explosion>();
 		hud = new HUD(player);
+		// teleport
+		teleport = new Teleport(tileMap);
+		teleport.setPosition(200, 190);
+
 		bgMusic = new AudioPlayer("/Resources/Music/level1-1.mp3");
 		bgMusic.play();
 	}
@@ -42,8 +52,8 @@ public class LevelOneState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		Rat r;
 		Saw s;
-		Point[] pointsRat = new Point[] {new Point(860, 200),new Point(1525, 200),new Point(1680, 200),new Point(1800, 200)};
-		Point[] pointsSaw = new Point[] {new Point(200, 100)};
+		Point[] pointsRat = new Point[] {new Point(1525, 200),new Point(1680, 200),new Point(1800, 200)};
+		Point[] pointsSaw = new Point[] {new Point(860, 200)};
 		for(int i = 0; i < pointsRat.length; i++) {
 			r = new Rat(tileMap);
 			r.setPosition(pointsRat[i].x, pointsRat[i].y);
@@ -57,13 +67,22 @@ public class LevelOneState extends GameState {
 	}
     public void update() {
 		
+		// check if end of level event should start
+		if(teleport.intersects(player)) {
+			eventFinish = true;
+		}
+		// play events
+		if(player.getLives() == 0) {
+			gameStateManager.setState(GameStateManager.DIESTATE);
+		}
+		if(eventFinish) eventFinish();
 		// update player
 		player.update();
 		tileMap.setPosition(
 			GamePanel.WIDTH / 2 - player.getx(),
 			GamePanel.HEIGHT / 2 - player.gety()
 		);
-		
+		tileMap.fixBounds();
 		// set background
 		bg.setPosition(tileMap.getx(), tileMap.gety());
 		
@@ -90,6 +109,8 @@ public class LevelOneState extends GameState {
 				i--;
 			}
 		}
+
+		teleport.update();
 	}
 	
 	public void draw(Graphics2D g) {
@@ -111,6 +132,13 @@ public class LevelOneState extends GameState {
 		// draw hud
 		hud.draw(g);
 		
+		// draw teleport
+		teleport.draw(g);
+		// draw transition boxes
+		g.setColor(java.awt.Color.BLACK);
+		for(int i = 0; i < tb.size(); i++) {
+			g.fill(tb.get(i));
+		}
 	}
 	public void keyPressed(int k) {
 		if(k == KeyEvent.VK_LEFT) player.setLeft(true);
@@ -129,5 +157,16 @@ public class LevelOneState extends GameState {
 		if(k == KeyEvent.VK_DOWN) player.setDown(false);
 		if(k == KeyEvent.VK_W) player.setJumping(false);
 		if(k == KeyEvent.VK_E) player.setGliding(false);
+	}
+
+	// finished level
+	private void eventFinish() {
+		eventCount++;
+		if(eventCount == 1) {
+            player.stop();
+			gameStateManager.setState(GameStateManager.WINSTATE);
+			
+		}
+		
 	}
 }

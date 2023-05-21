@@ -65,12 +65,20 @@ public abstract class MapObject {
 	public MapObject(TileMap tm) {
 		tileMap = tm;
 		tileSize = tm.getTileSize(); 
+		animation = new Animation();
+		facingRight = true;
 	}
 	
 	public boolean intersects(MapObject o) {
 		Rectangle r1 = getRectangle();
 		Rectangle r2 = o.getRectangle();
 		return r1.intersects(r2);
+	}
+
+	public boolean contains(MapObject o) {
+		Rectangle r1 = getRectangle();
+		Rectangle r2 = o.getRectangle();
+		return r1.contains(r2);
 	}
 	
 	public Rectangle getRectangle() {
@@ -197,6 +205,7 @@ public abstract class MapObject {
 	}
 	
 	public void draw(java.awt.Graphics2D g) {
+		setMapPosition();
 		if(facingRight) {
 			g.drawImage(
 				animation.getImage(),
