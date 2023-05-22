@@ -4,9 +4,10 @@ import GameObject.Background;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+
 import javax.imageio.ImageIO;
 
-public class MenuState extends GameState{
+public class WinState extends GameState{
     private Background bg;
     private BufferedImage head;
     private int currentChoice = 0;
@@ -17,7 +18,7 @@ public class MenuState extends GameState{
     private Font font;
     private Color fontColor1;
 
-    public MenuState(GameStateManager gameStateManager){
+    public WinState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
         try{
             bg = new Background("/Resources/Backgrounds/menubg.gif", 1);
@@ -45,7 +46,8 @@ public class MenuState extends GameState{
         bg.draw(g);
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("CATVENTURE",70,70);
+        g.drawString("Meow~Welcom Home",26,70);
+
         g.setFont(font);
         for (int i=0;i<options.length;i++){
             if (i==currentChoice){
@@ -56,7 +58,6 @@ public class MenuState extends GameState{
             }
             g.drawString(options[i],145,140+i*15);
         }
-
         if(currentChoice == 0) g.drawImage(head, 130, 130, null);
 		else if(currentChoice == 1) g.drawImage(head, 130, 145, null);
     }
@@ -65,9 +66,6 @@ public class MenuState extends GameState{
             gameStateManager.setState(GameStateManager.LEVELONESTATE);
         }
         if (currentChoice == 1){
-
-        }
-        if (currentChoice == 2){
             System.exit(0);
         }
     }
