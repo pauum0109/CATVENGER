@@ -21,6 +21,7 @@ public class LevelOneState extends GameState {
 	private int eventCount = 0;
 	private ArrayList<Rectangle> tb;
 	private boolean eventFinish;
+	private boolean eventDead;
 
 
 	public LevelOneState(GameStateManager gameStateManager) {
@@ -42,7 +43,7 @@ public class LevelOneState extends GameState {
 		hud = new HUD(player);
 		// teleport
 		teleport = new Teleport(tileMap);
-		teleport.setPosition(200, 190);
+		teleport.setPosition(5300, 190);
 
 		bgMusic = new AudioPlayer("/Resources/Music/level1-1.mp3");
 		bgMusic.play();
@@ -71,10 +72,12 @@ public class LevelOneState extends GameState {
 		if(teleport.intersects(player)) {
 			eventFinish = true;
 		}
-		// play events
-		if(player.getLives() == 0) {
-			gameStateManager.setState(GameStateManager.DIESTATE);
+		// check if player dead event should start
+		if(player.getHealth() == 0 || player.gety() > (GamePanel.HEIGHT-30)) {
+			eventDead = true;
 		}
+		// play events
+		if(eventDead) eventDead();
 		if(eventFinish) eventFinish();
 		// update player
 		player.update();
@@ -159,6 +162,30 @@ public class LevelOneState extends GameState {
 		if(k == KeyEvent.VK_E) player.setGliding(false);
 	}
 
+	// reset level
+	private void reset() {
+		player.reset();
+		player.setPosition(300, 161);
+		populateEnemies();
+		eventCount = 0;
+	}
+	// player has died
+	private void eventDead() {
+		eventCount++;
+		if(eventCount == 1) {
+		if(player.getLives() == 0) {
+				gameStateManager.setState(GameStateManager.DIESTATE);
+			}
+			else {
+				player.setDead();
+				player.stop();
+				eventDead = false;
+				eventCount = 0;
+				player.loseLife();
+				reset();
+			}
+		}
+	}
 	// finished level
 	private void eventFinish() {
 		eventCount++;
