@@ -45,8 +45,7 @@ public class MenuState extends GameState{
         bg.draw(g);
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("CATVENTURE",80,70);
-
+        g.drawString("CATVENTURE",70,70);
         g.setFont(font);
         for (int i=0;i<options.length;i++){
             if (i==currentChoice){
