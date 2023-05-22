@@ -72,7 +72,7 @@
 <!-- CONTTRIBUTORS -->
 <h2 id="contributors"> :small_orange_diamond: Contributors</h2>
 
-**Trần Phương Quang Huy - ITCSIU21271**  
+**Trần Phương Quang Huy - ITCSIU21071**  
 **Nguyễn Thị Phương Thảo - ITITITIU21214**       
 **Nguyễn Thị Anh Thơ - ITCSIU21236**  
 **Bùi Như Ý - ITCSIU21247**  
