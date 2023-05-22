@@ -42,8 +42,8 @@ public class LevelOneState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		Rat r;
 		Saw s;
-		Point[] pointsRat = new Point[] {new Point(860, 200),new Point(1525, 200),new Point(1680, 200),new Point(1800, 200)};
-		Point[] pointsSaw = new Point[] {new Point(200, 100)};
+		Point[] pointsRat = new Point[] {new Point(860, 200),new Point(1525, 200),new Point(1680, 200),new Point(1800, 200),new Point(4020, 200)};
+		Point[] pointsSaw = new Point[] {new Point(200, 100),new Point(2760, 100),new Point(4590, 100),new Point(4740, 100),new Point(4830, 100)};
 		for(int i = 0; i < pointsRat.length; i++) {
 			r = new Rat(tileMap);
 			r.setPosition(pointsRat[i].x, pointsRat[i].y);
