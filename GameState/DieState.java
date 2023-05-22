@@ -46,7 +46,7 @@ public class DieState extends GameState{
         bg.draw(g);
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("You are Die...",80,70);
+        g.drawString("You are Dead",65,70);
 
         g.setFont(font);
         for (int i=0;i<options.length;i++){

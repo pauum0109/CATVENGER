@@ -37,7 +37,7 @@ public class Player extends MapObject {
 	// animations
 	private ArrayList<BufferedImage[]> sprites;
 	private final int[] numFrames = {
-		2, 8, 1, 2, 4, 2, 5
+		2, 8, 1, 2, 4, 2, 5, 1
 	};
 	
 	// animation actions
@@ -86,7 +86,7 @@ public class Player extends MapObject {
 			
 			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Player/playersprites.gif"));
 			sprites = new ArrayList<BufferedImage[]>();
-			for(int i = 0; i < 7; i++) {
+			for(int i = 0; i < 8; i++) {
 				BufferedImage[] bi = new BufferedImage[numFrames[i]];
 				for(int j = 0; j < numFrames[i]; j++) {
 					bi[j] = spritesheet.getSubimage(j * width,i * height,width,height);
