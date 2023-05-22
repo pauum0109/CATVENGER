@@ -44,7 +44,6 @@ public class LevelOneState extends GameState {
 		// teleport
 		teleport = new Teleport(tileMap);
 		teleport.setPosition(5300, 190);
-
 		bgMusic = new AudioPlayer("/Resources/Music/level1-1.mp3");
 		bgMusic.play();
 	}
@@ -165,7 +164,7 @@ public class LevelOneState extends GameState {
 	// reset level
 	private void reset() {
 		player.reset();
-		player.setPosition(300, 161);
+		player.setPosition(100, 100);
 		populateEnemies();
 		eventCount = 0;
 	}
@@ -173,8 +172,13 @@ public class LevelOneState extends GameState {
 	private void eventDead() {
 		eventCount++;
 		if(eventCount == 1) {
-		if(player.getLives() == 0) {
-				gameStateManager.setState(GameStateManager.DIESTATE);
+			if(player.getLives() == 0) {
+				try{
+					gameStateManager.setState(GameStateManager.DIESTATE);
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 			else {
 				player.setDead();
