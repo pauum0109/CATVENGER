@@ -3,12 +3,14 @@ package GameState;
 import GameObject.Background;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class MenuState extends GameState{
     private Background bg;
-
+    private BufferedImage head;
     private int currentChoice = 0;
-    private String[] options = {"Start","Guide","Quit"};
+    private String[] options = {"Start","Quit"};
 
     private Color titleColor;
     private Font titleFont;
@@ -25,6 +27,8 @@ public class MenuState extends GameState{
             titleFont = new Font("Nordic Light",Font.PLAIN,28);
             font = new Font("valorax",Font.PLAIN,12);
             fontColor1 = new Color(60,78,97);
+
+            head = ImageIO.read(getClass().getResourceAsStream("/Resources/HUD/Hud.gif")).getSubimage(0, 12, 12, 11);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -41,18 +45,21 @@ public class MenuState extends GameState{
         bg.draw(g);
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("CATVENGER",80,70);
+        g.drawString("CATVENTURE",80,70);
 
         g.setFont(font);
         for (int i=0;i<options.length;i++){
             if (i==currentChoice){
-                g.setColor(fontColor1);
+                g.setColor(Color.RED);
             }
             else{
-                g.setColor(Color.RED);
+                g.setColor(fontColor1);
             }
             g.drawString(options[i],145,140+i*15);
         }
+
+        if(currentChoice == 0) g.drawImage(head, 130, 130, null);
+		else if(currentChoice == 1) g.drawImage(head, 130, 145, null);
     }
     private void select(){
         if (currentChoice == 0){
