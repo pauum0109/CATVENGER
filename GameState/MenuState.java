@@ -1,13 +1,20 @@
 package GameState;
 
 import GameObject.Background;
+import Audio.AudioPlayer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.util.HashMap;
+
 
 public class MenuState extends GameState{
     private Background bg;
+    private AudioPlayer bgMusic;
+
+    private HashMap<String, AudioPlayer> sfx;
+
     private BufferedImage head;
     private int currentChoice = 0;
     private String[] options = {"Start","Quit"};
@@ -22,6 +29,11 @@ public class MenuState extends GameState{
         try{
             bg = new Background("/Resources/Backgrounds/menubg.gif", 1);
             bg.setVector(-0.1,0);
+            bgMusic = new AudioPlayer("/Resources/Music/level1-1.mp3");
+            bgMusic.play();
+            sfx = new HashMap<String, AudioPlayer>();
+		    sfx.put("jump", new AudioPlayer("/Resources/SFX/jump.mp3"));
+		    sfx.put("scratch", new AudioPlayer("/Resources/SFX/scratch.mp3"));
 
             titleColor = new Color(255,182,43);
             titleFont = new Font("Nordic Light",Font.PLAIN,28);
@@ -62,12 +74,10 @@ public class MenuState extends GameState{
     }
     private void select(){
         if (currentChoice == 0){
+            sfx.get("jump").play();
             gameStateManager.setState(GameStateManager.LEVELONESTATE);
         }
         if (currentChoice == 1){
-
-        }
-        if (currentChoice == 2){
             System.exit(0);
         }
     }
@@ -76,16 +86,16 @@ public class MenuState extends GameState{
             select();
         }
         if (k==KeyEvent.VK_UP){
-            currentChoice--;
-            if (currentChoice == -1){
-                currentChoice = options.length-1;
-            }
+            
+                sfx.get("scratch").play();
+				currentChoice=0;
+			
         }
         if (k == KeyEvent.VK_DOWN){
-            currentChoice++;
-            if (currentChoice == options.length){
-                currentChoice = 0;
-            }
+            
+                sfx.get("scratch").play();
+				currentChoice=1;
+			
         } 
     }
     public void keyReleased(int k){
