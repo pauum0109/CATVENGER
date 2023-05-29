@@ -35,21 +35,19 @@
 <h2 id="about-the-game"> :cloud: About The Game</h2>
 
 <h3 id="intro"> Introduction </h3>
-<p align="justify"> 
-//
-</p>
+A game based on the Object-Oriented Programming method. Our group decided  to code a platform game which inspired us from ‘Super Mario’ and ‘Sonic 3’ based on the principles of these methods.
 
 <h3 id="rules"> Rules </h3>
 Take control of your character, which could be a skilled cat. He can move backward, forward, jump, glide, also attack high-range and scratch, these movements can be controlled by pressing left, right, ‘W’, ‘E’, ‘F’ and ‘R’ respectively. After defeating all the enemies, passing the obstacles all the long way, Whiskers will win if he reaches the final destination – His cozy home which is mentioned above. 
   
 <h3 id="demo"> Demo </h3>
-  //
+  <img src="Resources/README/DEMO-CATVENTURE.gif" alt="demo">
 
 <!-- ABOUT THE PROJECT -->
 <h2 id="about-the-project"> :pencil: About The Project</h2>
   
 <h3 id="uml"> UML </h3>
-  <img src="Resources/README/UML.png" alt="uml">
+  <img src="Resources/README/UML.png" alt="uml"/>
   
 <h3 id="game-features"> Game Features </h3>
   <ul>
