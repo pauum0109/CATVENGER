@@ -1,3 +1,12 @@
+/* 
++ Your Team Number: Group 6
++ Member names & IU code:
+Tran Phuong Quang Huy - ITCSIU21071
+Nguyễn Thi Phương Thao - ITITITIU21214
+Nguyễn Thi Anh Tho - ITCSIU21236
+Bui Như Y - ITCSIU21247
++ Purpose: Package Entity: The effect when enemy was defeated
+*/
 package Entity;
 
 import java.awt.Graphics2D;
@@ -32,12 +41,7 @@ public class Explosion {
 			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Sprites/Enemies/explosion.gif"));
 			sprites = new BufferedImage[6];
 			for(int i = 0; i < sprites.length; i++) {
-				sprites[i] = spritesheet.getSubimage(
-					i * width,
-					0,
-					width,
-					height
-				);
+				sprites[i] = spritesheet.getSubimage(i * width,0,width,height);
 			}
 			
 		}

@@ -1,10 +1,17 @@
+/* 
++ Your Team Number: Group 6
++ Member names & IU code:
+Tran Phuong Quang Huy - ITCSIU21071
+Nguyễn Thi Phương Thao - ITITITIU21214
+Nguyễn Thi Anh Tho - ITCSIU21236
+Bui Như Y - ITCSIU21247
++ Purpose: Package Entity: Add the house in the end of game, when cat reach this, Game Win.
+*/
 package Entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
 import javax.imageio.ImageIO;
-
 import GameObject.TileMap;
 
 public class Teleport extends MapObject {

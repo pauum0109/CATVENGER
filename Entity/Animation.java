@@ -1,3 +1,12 @@
+/* 
++ Your Team Number: Group 6
++ Member names & IU code:
+Tran Phuong Quang Huy - ITCSIU21071
+Nguyễn Thi Phương Thao - ITITITIU21214
+Nguyễn Thi Anh Tho - ITCSIU21236
+Bui Như Y - ITCSIU21247
++ Purpose: Package Entity: About animation of the cat in game
+*/
 package Entity;
 
 import java.awt.image.BufferedImage;

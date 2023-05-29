@@ -1,3 +1,13 @@
+/* 
++ Your Team Number: Group 6
++ Member names & IU code:
+Tran Phuong Quang Huy - ITCSIU21071
+Nguyễn Thi Phương Thao - ITITITIU21214
+Nguyễn Thi Anh Tho - ITCSIU21236
+Bui Như Y - ITCSIU21247
++ Purpose: User Interface: 'Game Frame' represents the main game window, while the `GamePanel` class 
+handles the rendering of game graphics and user input.
+*/
 package UI;
 
 import javax.swing.JFrame;
