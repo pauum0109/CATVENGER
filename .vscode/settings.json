@@ -5,7 +5,10 @@
             "lib/**/*.jar",
             "d:\\Code\\jl1.0.1.jar",
             "d:\\Code\\mp3spi1.9.5.jar",
-            "d:\\Code\\tritonus_share.jar"
+            "d:\\Code\\tritonus_share.jar",
+            "c:\\Users\\admin\\Downloads\\jl1.0.1.jar",
+            "c:\\Users\\admin\\Downloads\\mp3spi1.9.5.jar",
+            "c:\\Users\\admin\\Downloads\\tritonus_share.jar"
         ],
         "exclude": [
             "c:\\Users\\Alice\\Downloads\\Artifact.jar"

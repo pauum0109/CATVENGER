@@ -174,6 +174,7 @@ public class LevelOneState extends GameState {
 		if(eventCount == 1) {
 			if(player.getLives() == 0) {
 				try{
+					bgMusic.stop();
 					gameStateManager.setState(GameStateManager.DIESTATE);
 				}
 				catch(Exception e){
@@ -195,6 +196,7 @@ public class LevelOneState extends GameState {
 		eventCount++;
 		if(eventCount == 1) {
             player.stop();
+			bgMusic.stop();
 			gameStateManager.setState(GameStateManager.WINSTATE);
 			
 		}

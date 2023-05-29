@@ -29,7 +29,7 @@ public class WinState extends GameState{
         try{
             bg = new Background("/Resources/Backgrounds/menubg.gif", 1);
             bg.setVector(-0.1,0);
-            bgMusic = new AudioPlayer("/Resources/Music/level1-1.mp3");
+            bgMusic = new AudioPlayer("/Resources/SFX/winsfx.mp3");
             bgMusic.play();
             sfx = new HashMap<String, AudioPlayer>();
 		    sfx.put("jump", new AudioPlayer("/Resources/SFX/jump.mp3"));
@@ -76,6 +76,7 @@ public class WinState extends GameState{
     private void select(){
         if (currentChoice == 0){
             sfx.get("jump").play();
+            bgMusic.stop();
             gameStateManager.setState(GameStateManager.LEVELONESTATE);
         }
         if (currentChoice == 1){

@@ -106,6 +106,10 @@ public class Player extends MapObject {
 		sfx = new HashMap<String, AudioPlayer>();
 		sfx.put("jump", new AudioPlayer("/Resources/SFX/jump.mp3"));
 		sfx.put("scratch", new AudioPlayer("/Resources/SFX/scratch.mp3"));
+		sfx.put("fishball", new AudioPlayer("/Resources/SFX/fishballsfx.mp3"));
+		sfx.put("hurt", new AudioPlayer("/Resources/SFX/hurt.mp3"));
+
+
 	}
 	
 	public int getHealth(){
@@ -208,6 +212,7 @@ public class Player extends MapObject {
 			
 			// check enemy collision
 			if(intersects(e)) {
+				sfx.get("hurt").play();
 				hit(e.getDamage());
 			}
 			
@@ -355,6 +360,7 @@ public class Player extends MapObject {
 		}
 		else if(firing) {
 			if(currentAction != FIREBALL) {
+				sfx.get("fishball").play();
 				currentAction = FIREBALL;
 				animation.setFrames(sprites.get(FIREBALL));
 				animation.setDelay(100);
