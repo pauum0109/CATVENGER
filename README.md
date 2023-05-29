@@ -36,7 +36,7 @@
 
 <h3 id="intro"> Introduction </h3>
 <p align="justify"> 
-This project game “Caventure” is based on the principles of the Object-Oriented Programming method using Java language. The purpose of this project is to design a game based on the Object-Oriented Programming method. Our group decided  to code a platform game which inspired us from ‘Super Mario’ and ‘Sonic 3’ based on the principles of these methods. This project aims to demonstrate the Object – Oriented property through the combination of classes and objects.
+//
 </p>
 
 <h3 id="rules"> Rules </h3>
