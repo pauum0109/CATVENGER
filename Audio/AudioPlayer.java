@@ -1,3 +1,12 @@
+/* 
++ Your Team Number: Group 6
++ Member names & IU code:
+Tran Phuong Quang Huy - ITCSIU21071
+Nguyen Thi Phuong Thao - ITITITIU21214
+Nguyen Thi Anh Tho - ITCSIU21236
+Bui Nhu Y - ITCSIU21247
++ Purpose: Package Entity: About audio for game
+*/
 package Audio;
 
 import javax.sound.sampled.*;
