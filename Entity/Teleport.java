@@ -11,7 +11,9 @@ package Entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
 import javax.imageio.ImageIO;
+
 import GameObject.TileMap;
 
 public class Teleport extends MapObject {
@@ -25,14 +27,10 @@ public class Teleport extends MapObject {
 		cwidth = 20;
 		cheight = 20;
 		try {
-			BufferedImage spritesheet = ImageIO.read(
-				getClass().getResourceAsStream("/Resources/Home/nha.gif")
-			);
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Resources/Home/nha.gif"));
 			sprites = new BufferedImage[1];
 			for(int i = 0; i < sprites.length; i++) {
-				sprites[i] = spritesheet.getSubimage(
-					i * width, 0, width, height
-				);
+				sprites[i] = spritesheet.getSubimage(i * width, 0, width, height);
 			}
 			animation.setFrames(sprites);
 			animation.setDelay(1);

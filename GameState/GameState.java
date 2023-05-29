@@ -1,3 +1,4 @@
+
 /* 
 + Your Team Number: Group 6
 + Member names & IU code:
@@ -6,8 +7,7 @@ Nguyen Thi Phuong Thao - ITITITIU21214
 Nguyen Thi Anh Tho - ITCSIU21236
 Bui Nhu Y - ITCSIU21247
 + Purpose: Package GameState: Manage different stages of gameplay: MenuState, WinState, DieState,...
-*/
-package GameState;
+*/package GameState;
 
 public abstract class GameState {
     protected GameStateManager gameStateManager;

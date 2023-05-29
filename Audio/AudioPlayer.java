@@ -19,12 +19,7 @@ public class AudioPlayer {
 		
 		try {
 			
-			AudioInputStream ais =
-				AudioSystem.getAudioInputStream(
-					getClass().getResourceAsStream(
-						s
-					)
-				);
+			AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(s));
 			AudioFormat baseFormat = ais.getFormat();
 			AudioFormat decodeFormat = new AudioFormat(
 				AudioFormat.Encoding.PCM_SIGNED,
